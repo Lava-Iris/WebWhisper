@@ -28,6 +28,18 @@ button.addEventListener('click', async () => {
   
   chrome.storage.local.set({ isRecording });
   updateButtonState();
+
+  // try {
+  //   // Request microphone access
+  //   const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+  //   console.log("Microphone access granted.");
+  //   alert("Microphone access granted!");
+
+  //   // Stop the microphone stream if it's not needed immediately
+  //   // stream.getTracks().forEach(track => track.stop());
+  // } catch (err) {
+  //   console.error("Microphone access denied or an error occurred:", err);
+  //   alert(`Error: ${err.message}`);  }
 });
 
 function updateButtonState() {
