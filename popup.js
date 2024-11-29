@@ -6,59 +6,78 @@ chrome.storage.local.get(['isRecording'], (result) => {
   updateButtonState();
 });
 
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
-let recognition = null;
+if (!SpeechRecognition) {
+  alert("Speech Recognition is not supported in this browser.");
+}
+
+let recognition;
+let isListening = false;
+let timeout;
+const transcriptionEl = document.getElementById('transcription');
+
+function startRecording() {
+  recognition = new SpeechRecognition();
+  recognition.lang = 'en-US';  // Set language to English
+  recognition.interimResults = true; // Show results while speaking
+  recognition.maxAlternatives = 1; // Limit alternatives for simplicity
+  recognition.continuous = true; // Continue recognition until stopped
+
+  // Handle interim and final results
+  recognition.onresult = function(event) {
+    let transcript = '';
+    for (let i = event.resultIndex; i < event.results.length; i++) {
+      transcript += event.results[i][0].transcript;
+    }
+    transcriptionEl.textContent = transcript;
+    resetTimeout(); // Reset the timeout whenever we get results
+  };
+
+  recognition.onend = function() {
+    isListening = false;
+    transcriptionEl.textContent = "Speech recognition stopped.";
+    console.log(transcriptionEl.textContent)
+  };
+
+  recognition.onerror = function(event) {
+    transcriptionEl.textContent = "Error: " + event.error;
+    console.error("Error: " + event.error);
+  };
+
+  recognition.start();
+}
+
+function resetTimeout() {
+  clearTimeout(timeout);
+  timeout = setTimeout(() => {
+    if (isRecording) {
+      transcriptionEl.textContent += "\n\n Sent";
+      console.log(transcriptionEl.textContent)
+    }
+  }, 3000);
+}
+
+function stopRecording() {
+  if (recognition) {
+    recognition.stop();
+  }
+}
 
 button.addEventListener('click', async () => {
   if (!isRecording) {
+    isRecording = true;
     try {
-      isRecording = true;
-      console.log('Recording started');
-      const transcriptionEl = document.getElementById('transcription');
-      if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
-        // Initialize the Speech Recognition API
-        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-        recognition = new SpeechRecognition();
-
-        // Set recognition properties
-        recognition.lang = "en-US"; // Set language (change as needed)
-        recognition.interimResults = true; // Show interim results as the user speaks
-        recognition.continuous = true; // Continue recognition until stopped
-
-        recognition.start(); // Start recognition
-        // Handle recognition results
-        recognition.onresult = event => {
-          let last = event.results.length - 1;
-          let lastTranscript = event.results[last][0].transcript;
-          let interim_transcript = '';
-          let final_transcript = '';
-          console.log('Got result:', event.results);
-
-          for (var i = event.resultIndex; i < event.results.length; ++i) {
-              // Verify if the recognized text is the last with the isFinal property
-            if (event.results[i].isFinal) {
-              final_transcript += event.results[i][0].transcript;
-            } else {
-              interim_transcript += event.results[i][0].transcript;
-            }
-          }
-          transcriptionEl.textContent = interim_transcript;
-        };
-      } else {
-        transcriptionEl.textContent = "Speech recognition is not supported in this browser.";
-      }
-      chrome.runtime.sendMessage({ type: 'START_RECORDING' });
+      startRecording();
     } catch (err) {
       console.error('Error:', err);
       alert('Error: ' + err.message);
       return;
     }
+    chrome.runtime.sendMessage({ type: 'START_RECORDING' });
   } else {
     isRecording = false;
-    
-    if (recognition) {
-      recognition.stop();
-    }
+    stopRecording();
     chrome.runtime.sendMessage({ type: 'STOP_RECORDING' });
   }
   
