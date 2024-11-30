@@ -60,13 +60,18 @@ function resetTimeout() {
   clearTimeout(timeout);
   timeout = setTimeout(() => {
     if (isRecording) {
-      const [tab] = chrome.tabs.query({active: true, lastFocusedWindow: true});
-      chrom.tabs.sendMessage(tab.id, {type: 'message', text: transcriptionEl.textContent});
-      // chrome.runtime.sendMessage({ type: 'message', text: transcriptionEl.textContent });
+      (
+        message = transcriptionEl.textContent,
+        async () => {
+          const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+          const response = await chrome.tabs.sendMessage(tab.id, { type: 'message', text: message });
+          console.log(response);
+        }
+      )();
       transcriptionEl.textContent += "\n\n Sent";
       console.log(transcriptionEl.textContent)
     }
-  }, 3000);
+  }, 1000);
 }
 
 function stopRecording() {
