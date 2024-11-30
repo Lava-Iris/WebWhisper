@@ -36,13 +36,21 @@ function startRecording() {
 
   recognition.onend = function() {
     isListening = false;
-    transcriptionEl.textContent = "Speech recognition stopped.";
+    transcriptionEl.textContent = "[Speech recognition paused].";
     console.log(transcriptionEl.textContent)
+    // if there is input start again
+    if (isRecording) {
+      startRecording();
+    }
   };
 
   recognition.onerror = function(event) {
-    transcriptionEl.textContent = "Error: " + event.error;
-    console.error("Error: " + event.error);
+    if (event.error === 'no-speech') {
+      transcriptionEl.textContent = "[No speech detected.]";
+    } else {
+      transcriptionEl.textContent = "Error: " + event.error;
+      console.error("Error: " + event.error);
+    }
   };
 
   recognition.start();
@@ -52,6 +60,9 @@ function resetTimeout() {
   clearTimeout(timeout);
   timeout = setTimeout(() => {
     if (isRecording) {
+      const [tab] = chrome.tabs.query({active: true, lastFocusedWindow: true});
+      chrom.tabs.sendMessage(tab.id, {type: 'message', text: transcriptionEl.textContent});
+      // chrome.runtime.sendMessage({ type: 'message', text: transcriptionEl.textContent });
       transcriptionEl.textContent += "\n\n Sent";
       console.log(transcriptionEl.textContent)
     }
