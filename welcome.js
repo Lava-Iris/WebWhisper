@@ -4,8 +4,11 @@ document.getElementById("requestMic").addEventListener("click", async () => {
   try {
     // Request microphone access
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-    statusEl.textContent = "Microphone access granted!";
-    console.log("Microphone access granted.");
+    statusEl.textContent = "Microphone access granted! This page will close in 5 seconds.";
+    console.log("Microphone access granted! This page will close in 5 seconds.");
+    timeout = setTimeout(() => {
+      window.close();
+    }, 5000);
 
     // Stop the microphone stream (optional if you don't need it immediately)
     stream.getTracks().forEach(track => track.stop());
