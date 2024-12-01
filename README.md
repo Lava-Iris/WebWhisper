@@ -62,7 +62,7 @@ a powerful Chrome extension designed to make web navigation 🧭 hands-free and 
 * The user can deactivate voice control by saying “Stop listening” or clicking on the extension icon again.
 * The extension stops listening and provides a confirmation
 
-### Use Cases
+## Use Cases
 
 1. Search the Web
 * Use Case: Performing a web search using voice commands.
