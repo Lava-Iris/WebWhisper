@@ -1,3 +1,5 @@
+const Fuse = require('fuse.js'); // Webpack will handle this
+
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.type === 'message') {
     processMessage(message.text);
@@ -12,12 +14,34 @@ function processMessage(message) {
   handleVoiceCommand(message);
 }
 
+const findElement = (query) => {
+  const elements = [...document.querySelectorAll("*")].map((el) => ({
+    element: el,
+    text: el.textContent.trim(),
+    id: el.id,
+    class: el.className,
+    ariaLabel: el.getAttribute("aria-label"),
+    tag: el.tagName.toLowerCase(),
+  }));
+
+  const fuse = new Fuse(elements, {
+    keys: ["text", "id", "class"],
+    threshold: 0.4, // Match tolerance
+  });
+
+  const result = fuse.search(query);
+  return result.length ? result[0].item.element : null;
+};
+
 const actions = {
   click: (elementText) => {
-    const element = [...document.querySelectorAll("*")].find(
-      (el) => el.textContent.trim().toLowerCase() === elementText.toLowerCase()
-    );
-    if (element) element.click();
+    const element = findElement(elementText);
+    if (element) {
+      element.click();
+    } else {
+      console.warn("No element found for:", elementText);
+      
+    }
   },
   scroll: (direction) => {
     window.scrollBy({
@@ -32,6 +56,9 @@ const actions = {
       searchBox.dispatchEvent(new Event("input", { bubbles: true }));
     }
   },
+  open_in_new_tab: (url = null) => {
+    window.open(url, "_blank");
+  }
 };
 
 const handleVoiceCommand = (command) => {
@@ -41,7 +68,7 @@ const handleVoiceCommand = (command) => {
   const patterns = [
     { type: "click", regex: /^click (on )?(.*)$/ },
     { type: "scroll", regex: /^scroll (up|down)$/ },
-    { type: "search", regex: /^search for (.+)$/ },
+    { type: "search", regex: /^(search for|find) (.+)$/ },
   ];
 
   // Match command to an action
