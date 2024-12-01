@@ -149,18 +149,6 @@ a powerful Chrome extension designed to make web navigation 🧭 hands-free and 
     * Users should be able to review and delete any voice command history stored locally.
 
 
-### Sample Tests
-
-Explain what these tests test and why
-
-    Give an example
-
-### Style test
-
-Checks if the best practices and the right coding style has been used.
-
-    Give an example
-
 ## Deployment
 
 Add additional notes to deploy this on a live system
@@ -189,9 +177,6 @@ repository](https://github.com/PurpleBooth/a-good-readme-template/tags).
     - **Somya Tomar** - *Provided README Template* -
     [Lava-Iris](https://github.com/Lava-Iris)
 
-See also the list of
-[contributors](https://github.com/PurpleBooth/a-good-readme-template/contributors)
-who participated in this project.
 
 ## License
 
