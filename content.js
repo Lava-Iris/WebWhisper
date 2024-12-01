@@ -25,11 +25,13 @@ const findElement = (query) => {
   }));
 
   const fuse = new Fuse(elements, {
-    keys: ["text", "id", "class"],
-    threshold: 0.4, // Match tolerance
+    keys: ["text", "id", "class", "ariaLabel", "tag"],
+    threshold: 0.6, // Match tolerance
+    isCaseSensitive: false,
   });
 
   const result = fuse.search(query);
+  console.log(result);
   return result.length ? result[0].item.element : null;
 };
 
@@ -45,7 +47,7 @@ const actions = {
   },
   scroll: (direction) => {
     window.scrollBy({
-      top: direction === "down" ? 500 : -500,
+      top: direction === "down" ? 500 : direction == "up" ? -500 : direction == "top" ? -window.scrollY : window.scrollY,
       behavior: "smooth",
     });
   },
@@ -93,8 +95,49 @@ const handleVoiceCommand = (command) => {
   sendToLLM(command);
 };
 
+
+
+
+
 const sendToLLM = async (query) => {
+  const {available, defaultTemperature, defaultTopK, maxTopK } = await ai.languageModel.capabilities();
   console.log("sent to model");
+  prompt = ```
+  You are an assistant capable of controlling web page elements through simple commands. Your task is to interpret 
+  a user's command and map it to actions on the page. The input can have some spelling errors or be incomplete.
+
+  User Command: "${query}"
+
+  Your response should be a list of the tuples of actions and corresponding input. The actions are as follows:
+  1. 'click': name of the element to click on (with fuzzy search)
+  2. 'scroll': 'up', 'down', 'top', 'bottom'
+  3. 'search': search query to input into the search bar
+
+  Please respond only with the action and the target element, or state if no matching action is possible.
+
+  For example: 
+  Input: "Scroll up and click on q n a"
+  Output: "[(scroll, up), (click, q&a)]"
+
+  Input: "find cats and go down to the bottom"
+  Output: "[(search, cats), (scroll, bottom)]"
+
+  Input: "dance"
+  Output: "No matching action found"
+
+  ```
+  console.log(prompt);
+
+  if (available !== "no") {
+    const session = await ai.languageModel.create();
+    console.log("created session");
+  
+    // Prompt the model and wait for the whole result to come back.  
+    const result = await session.prompt(prompt);
+    console.log(result);
+  }
+  
+  
   // const result = await geminiModel.process(query); // Replace with actual Gemini model API
   // if (result.action && actions[result.action]) {
   //   actions[result.action](result.data);
