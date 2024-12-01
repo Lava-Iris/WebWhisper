@@ -172,11 +172,6 @@ Add additional notes to deploy this on a live system
   - [Creative Commons](https://creativecommons.org/) - Used to choose
     the license
 
-## Contributing
-
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code
-of conduct, and the process for submitting pull requests to us.
-
 ## Versioning
 
 We use [Semantic Versioning](http://semver.org/) for versioning. For the versions
