@@ -1,6 +1,9 @@
-WEB WHISPER- A chrome extension for voice controlled web navigation 🧭 
+# WEB WHISPER
 
-Key Features-
+a powerful Chrome extension designed to make web navigation 🧭 hands-free and intuitive. With just your voice, you can open tabs, scroll through pages, click links, and even search the web—no need to lift a finger. Perfect for multitaskers, people with accessibility needs, or anyone looking for a more efficient and futuristic way to browse.. But the page cannot open anymore so that is why I have moved it here.
+
+## Key Features 
+
 1. Voice Command Recognition:
     * Integration with a speech recognition library like Google Web Speech API or a custom solution.
     * Real-time transcription of speech into text to identify commands.
@@ -12,22 +15,23 @@ Key Features-
     * Basic Navigation: Support for commands like "go back," "go forward," "reload," "open new tab," "close tab," and "open URL."
     * Scrolling: Commands like "scroll up," "scroll down," "scroll left," "scroll right," and "scroll to top."
     * Link/Element Interaction: Allow the user to select links, buttons, or other interactive elements using commands like "click on the first link," "press button," "go to settings," etc.
-5. Voice Feedback:
+4. Voice Feedback:
     * Text-to-speech feedback (using SpeechSynthesis API) for confirming actions and providing contextual information.
     * Provide feedback for successful or unsuccessful actions (e.g., "Page reloaded," "Link not found").
-6. Accessibility Features:
+5. Accessibility Features:
     * High contrast, larger font support for visually impaired users.
     * Option for controlling volume or changing speech speed.
-7. Command List and Help:
+6. Command List and Help:
     * A voice-activated help system that lists available commands.
     * Users can say “What can I say?” or “Help” to receive a list of recognized commands.
-8. Multilingual Support:
+7. Multilingual Support:
     * Integration with language models to support multiple languages, allowing commands to be spoken in different languages.
-9. Privacy and Security:
+8. Privacy and Security:
     * Ensure that no personal data (such as voice recordings) is stored or shared without the user's consent.
     * Ensure that the voice recognition process is performed locally, without sending data to external servers unless necessary.
 
-Workflow for the WEB WHISPER-
+### Workflow
+
 1. Installation & Setup
 * Users install the extension from the Chrome Web Store.
 * During the first launch, the user is prompted to grant permissions for microphone access.
@@ -56,27 +60,10 @@ Workflow for the WEB WHISPER-
 * Commands can be added or removed, and the user can set preferences for voice speed, volume, and language.
 8. Exit
 * The user can deactivate voice control by saying “Stop listening” or clicking on the extension icon again.
-* The extension stops listening and provides a confirmation.
+* The extension stops listening and provides a confirmation
 
-Example Voice Commands
-* Basic Navigation:
-    * "Go back"
-    * "Go forward"
-    * "Reload this page"
-    * "Open a new tab"
-    * "Close this tab"
-* Scrolling:
-    * "Scroll down"
-    * "Scroll up"
-    * "Scroll to the top"	◦	"Scroll left"
-* Element Interaction:
-    * "Click on the first link"
-    * "Click on the button that says ‘Submit’"
-* Help/Commands:
-    * "What can I say?"
-    * "Show commands"
+### Use Cases
 
-use cases-
 1. Scroll Control
 * Use Case: Scrolling through a webpage using voice commands.
     * Actors: User, Voice-Controlled Chrome Extension, Web Browser
@@ -113,7 +100,8 @@ use cases-
     * Description: The user can say, "Bookmark this page," "Add to favorites," or "Show my bookmarks" to manage their browsing bookmarks.
     * Example: "Bookmark this page" saves the current webpage to the user's bookmark list.
 
-user stories-
+## User Stories
+
 1. Voice Navigation for Web Pages
 * As a user, I want to navigate through web pages using voice commands so that I can browse the internet without needing to use a mouse or keyboard.
 * Acceptance Criteria:
@@ -159,4 +147,67 @@ user stories-
 * Acceptance Criteria:
     * The extension should not record or save any voice data unless explicitly allowed by the user.
     * Users should be able to review and delete any voice command history stored locally.
+
+
+### Sample Tests
+
+Explain what these tests test and why
+
+    Give an example
+
+### Style test
+
+Checks if the best practices and the right coding style has been used.
+
+    Give an example
+
+## Deployment
+
+Add additional notes to deploy this on a live system
+
+## Built With
+
+  - [Contributor Covenant](https://www.contributor-covenant.org/) - Used
+    for the Code of Conduct
+  - [Creative Commons](https://creativecommons.org/) - Used to choose
+    the license
+
+## Contributing
+
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code
+of conduct, and the process for submitting pull requests to us.
+
+## Versioning
+
+We use [Semantic Versioning](http://semver.org/) for versioning. For the versions
+available, see the [tags on this
+repository](https://github.com/PurpleBooth/a-good-readme-template/tags).
+
+## Authors
+
+  - **Kirti Khatri** - *Provided README Template* -
+    [sushi-ki](https://github.com/sushi-ki)
+
+    - **Lavanya Mishra** - *Provided README Template* -
+    [Lava-Iris](https://github.com/Lava-Iris)
+
+    - **Somya Tomar** - *Provided README Template* -
+    [Lava-Iris](https://github.com/Lava-Iris)
+
+See also the list of
+[contributors](https://github.com/PurpleBooth/a-good-readme-template/contributors)
+who participated in this project.
+
+## License
+
+This project is licensed under the [CC0 1.0 Universal](LICENSE.md)
+Creative Commons License - see the [LICENSE.md](LICENSE.md) file for
+details
+
+## Acknowledgments
+
+  - Hat tip to anyone whose code is used
+  - Inspiration
+  - etc
+
 
