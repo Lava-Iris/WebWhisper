@@ -30,7 +30,7 @@ a powerful Chrome extension designed to make web navigation 🧭 hands-free and 
     * Ensure that no personal data (such as voice recordings) is stored or shared without the user's consent.
     * Ensure that the voice recognition process is performed locally, without sending data to external servers unless necessary.
 
-### Workflow
+## Workflow
 
 1. Installation & Setup
 * Users install the extension from the Chrome Web Store.
