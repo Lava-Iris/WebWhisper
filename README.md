@@ -64,37 +64,32 @@ a powerful Chrome extension designed to make web navigation 🧭 hands-free and 
 
 ### Use Cases
 
-1. Scroll Control
-* Use Case: Scrolling through a webpage using voice commands.
-    * Actors: User, Voice-Controlled Chrome Extension, Web Browser
-    * Description: The user can say commands like "Scroll down," "Scroll up," "Scroll to the top," or "Scroll to the bottom" to navigate a webpage without needing a mouse or keyboard.
-    * Example: "Scroll down" scrolls down the page, "Scroll to the top" takes the user to the top of the page.
-2. Search the Web
+1. Search the Web
 * Use Case: Performing a web search using voice commands.
     * Actors: User, Voice-Controlled Chrome Extension, Web Browser, Search Engine
     * Description: The user says something like, "Search for [query]" or "Find [topic]" and the extension automatically opens a search engine with the query.
     * Example: "Search for how to bake a cake" performs a Google search for the recipe.
-3. Open/Close Incognito Mode
+2. Open/Close Incognito Mode
 * Use Case: Managing browser modes with voice.
     * Actors: User, Voice-Controlled Chrome Extension, Web Browser
     * Description: The user can say, "Open incognito mode" to open a new incognito window, or "Close incognito window" to exit incognito mode.
     * Example: "Open incognito mode" launches a private browsing window.
-4. Highlighting Text
+3. Highlighting Text
 * Use Case: Highlighting text or selecting a portion of text on a webpage.
     * Actors: User, Voice-Controlled Chrome Extension, Web Browser
     * Description: The user can say, "Highlight [text]" to select specific text for further actions such as copying, sharing, or searching.
     * Example: "Highlight the title" selects the title of the webpage.
-5. Control Media Playback
+4. Control Media Playback
 * Use Case: Controlling audio or video playback on websites like YouTube, Netflix, or music streaming services.
     * Actors: User, Voice-Controlled Chrome Extension, Web Browser, Media Player
     * Description: The user can issue voice commands to control media playback, such as "Play," "Pause," "Next," "Previous," "Mute," or "Unmute."
     * Example: "Play" resumes the video; "Next" skips to the next video or song.
-6. Form Filling
+5. Form Filling
 * Use Case: Filling out online forms using voice commands.
     * Actors: User, Voice-Controlled Chrome Extension, Web Browser
     * Description: The user can say, "Fill in my name," "Enter my email," or "Submit the form" to complete fields in a form.
     * Example: "Fill in my name" autofills the name field of an online form with the user's saved information.
-7. Bookmark Management
+6. Bookmark Management
 * Use Case: Adding or managing bookmarks via voice.
     * Actors: User, Voice-Controlled Chrome Extension, Web Browser
     * Description: The user can say, "Bookmark this page," "Add to favorites," or "Show my bookmarks" to manage their browsing bookmarks.
@@ -137,12 +132,7 @@ a powerful Chrome extension designed to make web navigation 🧭 hands-free and 
 * Acceptance Criteria:
     * The extension should support multiple languages (e.g., English, Spanish, French) for voice commands.
     * Users should be able to switch language settings from the extension’s settings page.
-8. Hands-Free Navigation for Accessibility
-* As a user, I want the extension to provide enhanced accessibility features for hands-free web browsing to support users with disabilities.
-* Acceptance Criteria:
-    * The extension should be usable by people with physical disabilities (e.g., motor impairments).
-    * Features should include simple navigation, large text reading, and integration with screen readers.
-9. Privacy and Data Security for Voice Commands
+8. Privacy and Data Security for Voice Commands
 * As a user, I want to ensure that my voice data is secure and not stored or misused by the extension.
 * Acceptance Criteria:
     * The extension should not record or save any voice data unless explicitly allowed by the user.
