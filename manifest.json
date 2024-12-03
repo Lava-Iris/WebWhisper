@@ -1,0 +1,48 @@
+{
+    "manifest_version": 3,
+    "name": "Google AI Hackathon 2024",
+    "version": "1.0",
+    "description": "This is an extension to do simple browser commands through voice input.",
+    "permissions": [
+        "tabs",
+        "activeTab",
+        "storage",
+        "declarativeContent"
+    ],
+    "background": {
+        "service_worker": "background.js"   
+    },
+    "host_permissions": [
+      "<all_urls>"
+    ],
+    "action": {
+      "default_popup": "popup.html",
+      "default_icon": {
+          "16": "images/icon16.png",
+          "48": "images/icon48.png",
+          "128": "images/icon128.png"
+      }
+    },
+    "content_scripts": [
+        {
+            "matches": ["<all_urls>"],
+            "js": ["content.bundle.js"]
+        }
+    ],
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "images/icon16.png",
+                "images/icon48.png",
+                "images/icon128.png",
+                "popup.html",
+                "popup.js",
+                "popup.css",
+                "background.js",
+                "content.js",
+                "requestPermissions.js"
+            ],
+            "matches": ["<all_urls>"]
+        }
+    ]
+}

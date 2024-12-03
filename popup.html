@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>WebWhisper</title>
+  <style>
+    body { 
+      width: 200px; 
+      padding: 10px; 
+    }
+    button { 
+      width: 100%; 
+      margin: 5px; 
+      padding: 8px; 
+    }
+    .recording { 
+      background: #ff4444; 
+      color: white; 
+    }
+    #status {
+      color: #666;
+      font-size: 12px;
+      margin-top: 8px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <button id="toggleButton">Start Recording</button>
+  <div id="status"></div>
+  <p><strong>Transcription:</strong></p>
+  <p id="transcription">
+    [No speech detected yet]
+  </p>
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -3,29 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Voice to Text</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-      padding: 20px;
-    }
-    #output {
-      border: 1px solid #ddd;
-      padding: 10px;
-      margin-top: 20px;
-      min-height: 100px;
-    }
-  </style>
+  <title>WebWhisper</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-  <h1>Voice to Text</h1>
-  <p>Click the button and start yapping. The speech-to-text will start when you speak and stop after a pause.</p>
-
-  <button id="startStopButton">Start</button>
-  <div id="output"></div>
-
-  <script src="script.js"></script>
+  <h1>Welcome to the Extension</h1>
+  
+  <div class="mic-container">
+    <div class="mic">
+      <div class="mic-head"></div>
+      <div class="mic-neck"></div>
+      <div class="mic-base"></div>
+    </div>
+    <div class="indicator"></div>
+  </div>
+  <button id="requestMic">Request Microphone Access</button>
+    <p id="status"></p>
+  
+  <script src="welcome.js"></script>
 </body>
 </html>
