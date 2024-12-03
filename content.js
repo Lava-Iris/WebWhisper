@@ -33,6 +33,8 @@ const findElement = (query) => {
   const result = fuse.search(query);
   console.log(result);
   return result.length ? result[0].item.element : null;
+
+  // return elements.find((el) => el.text.toLowerCase().includes(query.toLowerCase()));
 };
 
 const actions = {
@@ -102,7 +104,7 @@ const handleVoiceCommand = (command) => {
 const sendToLLM = async (query) => {
   const {available, defaultTemperature, defaultTopK, maxTopK } = await ai.languageModel.capabilities();
   console.log("sent to model");
-  prompt = ```
+  prompt_template = `
   You are an assistant capable of controlling web page elements through simple commands. Your task is to interpret 
   a user's command and map it to actions on the page. The input can have some spelling errors or be incomplete.
 
@@ -124,24 +126,22 @@ const sendToLLM = async (query) => {
 
   Input: "dance"
   Output: "No matching action found"
-
-  ```
-  console.log(prompt);
+  `;
+  console.log(prompt_template);
 
   if (available !== "no") {
     const session = await ai.languageModel.create();
     console.log("created session");
   
     // Prompt the model and wait for the whole result to come back.  
-    const result = await session.prompt(prompt);
+    const result = await session.prompt(prompt_template);
     console.log(result);
   }
   
-  
-  // const result = await geminiModel.process(query); // Replace with actual Gemini model API
-  // if (result.action && actions[result.action]) {
-  //   actions[result.action](result.data);
-  // } else {
-  //   console.error("Unrecognized command or action:", result);
-  // }
+  const result = await geminiModel.process(query); // Replace with actual Gemini model API
+  if (result.action && actions[result.action]) {
+    actions[result.action](result.data);
+  } else {
+    console.error("Unrecognized command or action:", result);
+  }
 };
