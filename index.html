@@ -4,12 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WebWhisper</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <h1>Welcome to the Extension</h1>
+  
+  <div class="mic-container">
+    <div class="mic">
+      <div class="mic-head"></div>
+      <div class="mic-neck"></div>
+      <div class="mic-base"></div>
+    </div>
+    <div class="indicator"></div>
+  </div>
   <button id="requestMic">Request Microphone Access</button>
-  <p id="status"></p>
-
+    <p id="status"></p>
+  
   <script src="welcome.js"></script>
 </body>
 </html>
