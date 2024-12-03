@@ -5,7 +5,6 @@ chrome.storage.local.get(["isRecording"], (result) => {
   isRecording = result.isRecording || false;
   updateButtonState();
 });
-
 const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
 
