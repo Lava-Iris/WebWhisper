@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
   "name": "google-ai-hackathon-2024",
   "version": "1.0.0",
   "description": "",
@@ -17,11 +16,5 @@
   },
   "devDependencies": {
     "parcel": "^2.13.2"
-=======
-  "devDependencies": {
-    "fuse.js": "^7.0.0",
-    "webpack": "^5.96.1",
-    "webpack-cli": "^5.1.4"
->>>>>>> 29eeac5cd9990310b97d050479193f394b396598
   }
 }
