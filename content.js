@@ -45,9 +45,21 @@ const findElement = (query, clickable = false) => {
   // return elements.find((el) => el.text.toLowerCase().includes(query.toLowerCase()));
 };
 
+const findElementHeuristically = (query) => {
+  const candidates = document.querySelectorAll("button, a, input, textarea, [aria-label]");
+  for (const element of candidates) {
+    const label = element.textContent || element.getAttribute("aria-label") || element.placeholder;
+    if (label && label.toLowerCase().includes(query.toLowerCase())) {
+      return element;
+    }
+  }
+  return null;
+};
+
+
 const actions = {
   click: (elementText) => {
-    const element = findElement(elementText, clickable = true);
+    const element = findElement(elementText, true) || findElementHeuristically(elementText);
     if (element) {
       element.click();
     } else {
@@ -66,11 +78,11 @@ const actions = {
   },
   type: (text, area = null) => {
     if (area) {
-      findElement(area).value = text;
+      (findElement(area) || findElementHeuristically(area)).value = text;
     } else if (document.activeElement.tagName === "INPUT" || document.activeElement.tagName === "TEXTAREA") {
       document.activeElement.value = text;
     } else {
-      const el = findElement("input") || findElement("textarea");
+      const el = findElement("input") || findElement("textarea") || findElement("div[contenteditable]");
       if (el) el.value = text;
     }
   }
@@ -81,7 +93,7 @@ const handleVoiceCommand = (command) => {
 
   // Define regex patterns
   const patterns = [
-    { type: "click", regex: /^click (on )?(.*)$/ },
+    { type: "click", regex: /^(click (on )?|go (to)?)(.*)$/ },
     { type: "scroll", regex: /^scroll (up|down|to the (top|bottom))$/ },
     { type: "type", regex: /^((type|write)\s+(.+?)\s+in\s+(.+)|(type|write)\s+(.+))$/ },
   ];
@@ -92,7 +104,7 @@ const handleVoiceCommand = (command) => {
     if (match) {
       switch (type) {
         case "click":
-          actions.click(match[2]);
+          actions.click(match[4]);
           return;
         case "scroll":
           actions.scroll(match[-1]);
@@ -119,19 +131,20 @@ const handleVoiceCommand = (command) => {
 const sendToLLM = async (query) => {
   const {available, defaultTemperature, defaultTopK, maxTopK } = await ai.languageModel.capabilities();
   console.log("sent to model");
-  prompt_template = `
+  const prompt_template = `
   You are an assistant capable of controlling web page elements through simple commands. Your task is to interpret 
   a user's command and map it to actions on the page. The input can have some spelling errors or be incomplete.
 
   User Command: "${query}"
 
   Your response should be a list of the tuples of actions and corresponding input. The actions and their inputs are as follows:
-  1. 'click': name of the element to click on (with fuzzy search)
-  2. 'scroll': 'up', 'down', 'top', 'bottom'
-  3. 'open_in_new_tab': URL to open in a new tab (if the input is empty, it opens  blank new tab)
-  4. 'type': text to type in the active input field (if no input field is active, find the first input field and type in it)
+  1. (click, text): where text is used to search for the relevant element to click on based on element text or id (with fuzzy search)
+  2. (scroll, direction): directions can be 'up', 'down', 'top' or 'bottom'
+  3. (open_in_new_tab, url): url (optional) is the url to open in a new tab (if url is empty, it opens a blank new tab)
+  4. (type, text, element): element is optional and is used to find the element to type in. If no element is selected, it types the
+   text in the active input field (if no input field is active, it finds the first input field and types in it)
 
-  Please respond only with the action and the target element, or state if no matching action is possible.
+  Please respond only with the action and the inputs, or state if no matching action is possible.
 
   For example: 
   Input: "Scroll up and click on q n a"
