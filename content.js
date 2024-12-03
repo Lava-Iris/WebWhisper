@@ -14,7 +14,7 @@ function processMessage(message) {
   handleVoiceCommand(message);
 }
 
-const findElement = (query) => {
+const findElement = (query, clickable = false) => {
   const elements = [...document.querySelectorAll("*")].map((el) => ({
     element: el,
     text: el.textContent.trim(),
@@ -32,6 +32,14 @@ const findElement = (query) => {
 
   const result = fuse.search(query);
   console.log(result);
+  if (clickable) {
+    for (const { item } of result) {
+      if (item.element instanceof HTMLElement && item.element.click) {
+        return item.element;
+      }
+    }
+    return null;
+  }
   return result.length ? result[0].item.element : null;
 
   // return elements.find((el) => el.text.toLowerCase().includes(query.toLowerCase()));
@@ -39,7 +47,7 @@ const findElement = (query) => {
 
 const actions = {
   click: (elementText) => {
-    const element = findElement(elementText);
+    const element = findElement(elementText, clickable = true);
     if (element) {
       element.click();
     } else {
@@ -53,15 +61,18 @@ const actions = {
       behavior: "smooth",
     });
   },
-  search: (query) => {
-    const searchBox = document.querySelector("input[type='search'], input[type='text']");
-    if (searchBox) {
-      searchBox.value = query;
-      searchBox.dispatchEvent(new Event("input", { bubbles: true }));
-    }
-  },
   open_in_new_tab: (url = null) => {
     window.open(url, "_blank");
+  },
+  type: (text, area = null) => {
+    if (area) {
+      findElement(area).value = text;
+    } else if (document.activeElement.tagName === "INPUT" || document.activeElement.tagName === "TEXTAREA") {
+      document.activeElement.value = text;
+    } else {
+      const el = findElement("input") || findElement("textarea");
+      if (el) el.value = text;
+    }
   }
 };
 
@@ -71,8 +82,8 @@ const handleVoiceCommand = (command) => {
   // Define regex patterns
   const patterns = [
     { type: "click", regex: /^click (on )?(.*)$/ },
-    { type: "scroll", regex: /^scroll (up|down)$/ },
-    { type: "search", regex: /^(search for|find) (.+)$/ },
+    { type: "scroll", regex: /^scroll (up|down|to the (top|bottom))$/ },
+    { type: "type", regex: /^((type|write)\s+(.+?)\s+in\s+(.+)|(type|write)\s+(.+))$/ },
   ];
 
   // Match command to an action
@@ -84,10 +95,14 @@ const handleVoiceCommand = (command) => {
           actions.click(match[2]);
           return;
         case "scroll":
-          actions.scroll(match[1]);
+          actions.scroll(match[-1]);
           return;
-        case "search":
-          actions.search(match[1]);
+        case "type":
+          if (match3) {
+            actions.type(match[3], match[4]);
+          } else {
+            actions.type(match[6]);
+          }
           return;
       }
     }
@@ -110,10 +125,11 @@ const sendToLLM = async (query) => {
 
   User Command: "${query}"
 
-  Your response should be a list of the tuples of actions and corresponding input. The actions are as follows:
+  Your response should be a list of the tuples of actions and corresponding input. The actions and their inputs are as follows:
   1. 'click': name of the element to click on (with fuzzy search)
   2. 'scroll': 'up', 'down', 'top', 'bottom'
-  3. 'search': search query to input into the search bar
+  3. 'open_in_new_tab': URL to open in a new tab (if the input is empty, it opens  blank new tab)
+  4. 'type': text to type in the active input field (if no input field is active, find the first input field and type in it)
 
   Please respond only with the action and the target element, or state if no matching action is possible.
 
@@ -122,10 +138,13 @@ const sendToLLM = async (query) => {
   Output: "[(scroll, up), (click, q&a)]"
 
   Input: "find cats and go down to the bottom"
-  Output: "[(search, cats), (scroll, bottom)]"
+  Output: "[(click, search), (type, cats), (scroll, bottom)]"
 
   Input: "dance"
-  Output: "No matching action found"
+  Output: "No matching action found, please try again."
+
+  Input: "open google in a new tab"
+  Output: "[(open_in_new_tab, https://www.google.com)]"
   `;
   console.log(prompt_template);
 
