@@ -191,7 +191,7 @@ const createSession = async () => {
   `;
 
   if (available === "readily") {
-    session = await ai.languageModel.create(system_prompt);
+    session = await ai.languageModel.create({systemPrompt: system_prompt});
     console.log("created session");
   } else {
     console.warn("The built in AI model is not available. Complex commands may not be supported.");
@@ -199,21 +199,19 @@ const createSession = async () => {
 }
 
 const sendToLLM = async (query) => {
-  if (session && session.tokensLeft > query.length + 100) {
-    const result = await session.prompt(query);
-    console.log(result);
-    if (result[0] == '[') {
-      const actionsList = JSON.parse(result);
-      for (const [action, ...data] of actionsList) {
-        if (actions[action]) {
-          actions[action](...data);
-        } else {
-          console.warn("Unrecognized action:", action);
-        }
+  if (!session || session.tokensLeft < query.length + 100) {
+    createSession();
+  }
+  const result = await session.prompt(query);
+  console.log(result);
+  if (result[0] == '[') {
+    const actionsList = JSON.parse(result);
+    for (const [action, ...data] of actionsList) {
+      if (actions[action]) {
+        actions[action](...data);
+      } else {
+        console.warn("Unrecognized action:", action);
       }
     }
-  } else {
-    createSession();
-    sendToLLM(query);
-  }
+  } 
 };
