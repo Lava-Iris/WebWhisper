@@ -99,85 +99,19 @@ a powerful Chrome extension designed to make web navigation 🧭 hands-free and 
 
 1. Voice Navigation for Web Pages
 * As a user, I want to navigate through web pages using voice commands so that I can browse the internet without needing to use a mouse or keyboard.
-* Acceptance Criteria:
-    * The extension listens to predefined voice commands, such as "next page," "previous page," or "scroll down."
-    * The web page responds to commands with smooth transitions and actions.
-    * The extension supports voice commands for navigation buttons (e.g., "click home," "open settings").
 2. Voice Command for Opening Links
 * As a user, I want to be able to open links on a page using voice commands so that I can easily access additional content without using a mouse.
-* Acceptance Criteria:
-    * The extension listens for commands like "click [link name]" or "open [link description]."
-    * The system identifies links based on the spoken text and opens the correct page.
 3. Voice Commands for Page Actions (e.g., Submit, Cancel)
 * As a user, I want to perform page actions like submitting forms or cancelling actions using voice commands.
-* Acceptance Criteria:
-    * The extension allows voice commands for interacting with page buttons such as "submit," "cancel," or "save."
-    * Confirmation of the action should be provided (e.g., "Form submitted").
 4. Customizable Voice Command Settings
 * As a user, I want to customize voice commands to fit my preferences or language so that the experience is more personalized.
-* Acceptance Criteria:
-    * The user can add or modify voice commands through a settings menu.
-    * Custom commands should be stored and work seamlessly.
 5. Voice Command for Page Refresh
 * As a user, I want to refresh the webpage using a voice command, allowing for easy reloading without manually clicking the refresh button.
-* Acceptance Criteria:
-    * The user can say "refresh page" to reload the current web page.
 6. Voice Command for Browser Tabs Management
 * As a user, I want to switch between tabs, open new tabs, or close tabs using voice commands so that I can manage my browsing experience hands-free.
-* Acceptance Criteria:
-    * Commands like "switch to tab 1," "close tab," or "open new tab" should work as expected.
-    * The extension can identify open tabs by their titles and allow switching between them via voice.
 7. Multilingual Voice Support
 * As a user, I want to use the extension in my preferred language so that I can navigate the web in the language that is most comfortable for me.
-* Acceptance Criteria:
-    * The extension should support multiple languages (e.g., English, Spanish, French) for voice commands.
-    * Users should be able to switch language settings from the extension’s settings page.
 8. Privacy and Data Security for Voice Commands
 * As a user, I want to ensure that my voice data is secure and not stored or misused by the extension.
-* Acceptance Criteria:
-    * The extension should not record or save any voice data unless explicitly allowed by the user.
-    * Users should be able to review and delete any voice command history stored locally.
-
-
-## Deployment
-
-Add additional notes to deploy this on a live system
-
-## Built With
-
-  - [Contributor Covenant](https://www.contributor-covenant.org/) - Used
-    for the Code of Conduct
-  - [Creative Commons](https://creativecommons.org/) - Used to choose
-    the license
-
-## Versioning
-
-We use [Semantic Versioning](http://semver.org/) for versioning. For the versions
-available, see the [tags on this
-repository](https://github.com/PurpleBooth/a-good-readme-template/tags).
-
-## Authors
-
-  - **Kirti Khatri** - *Provided README Template* -
-    [sushi-ki](https://github.com/sushi-ki)
-
-    - **Lavanya Mishra** - *Provided README Template* -
-    [Lava-Iris](https://github.com/Lava-Iris)
-
-    - **Somya Tomar** - *Provided README Template* -
-    [Lava-Iris](https://github.com/Lava-Iris)
-
-
-## License
-
-This project is licensed under the [CC0 1.0 Universal](LICENSE.md)
-Creative Commons License - see the [LICENSE.md](LICENSE.md) file for
-details
-
-## Acknowledgments
-
-  - Hat tip to anyone whose code is used
-  - Inspiration
-  - etc
 
 
