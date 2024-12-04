@@ -1,117 +1,53 @@
 # WEB WHISPER
 
-a powerful Chrome extension designed to make web navigation 🧭 hands-free and intuitive. With just your voice, you can open tabs, scroll through pages, click links, and even search the web—no need to lift a finger. Perfect for multitaskers, people with accessibility needs, or anyone looking for a more efficient and futuristic way to browse.. But the page cannot open anymore so that is why I have moved it here.
+A powerful Chrome extension designed to make web navigation hands-free and intuitive. With just your voice, you can open tabs, scroll through pages, click links, and even search the web—no need to lift a finger. Perfect for multitaskers, people with accessibility needs, or anyone looking for a more efficient and futuristic way to browse.
 
-## Key Features 
+## Setup
 
-1. Voice Command Recognition:
-    * Integration with a speech recognition library like Google Web Speech API or a custom solution.
-    * Real-time transcription of speech into text to identify commands.
-    * Ability to recognize common web navigation commands, such as "go back," "scroll down," "click on link," etc.
-2. Customizable Commands:
-    * Users can define custom voice commands for specific actions (e.g., "open news," "show menu").
-    * Integration with a user-friendly settings page to add, modify, or remove commands.
-3. Web Page Navigation:
-    * Basic Navigation: Support for commands like "go back," "go forward," "reload," "open new tab," "close tab," and "open URL."
-    * Scrolling: Commands like "scroll up," "scroll down," "scroll left," "scroll right," and "scroll to top."
-    * Link/Element Interaction: Allow the user to select links, buttons, or other interactive elements using commands like "click on the first link," "press button," "go to settings," etc.
-4. Voice Feedback:
-    * Text-to-speech feedback (using SpeechSynthesis API) for confirming actions and providing contextual information.
-    * Provide feedback for successful or unsuccessful actions (e.g., "Page reloaded," "Link not found").
-5. Accessibility Features:
-    * High contrast, larger font support for visually impaired users.
-    * Option for controlling volume or changing speech speed.
-6. Command List and Help:
-    * A voice-activated help system that lists available commands.
-    * Users can say “What can I say?” or “Help” to receive a list of recognized commands.
-7. Multilingual Support:
-    * Integration with language models to support multiple languages, allowing commands to be spoken in different languages.
-8. Privacy and Security:
-    * Ensure that no personal data (such as voice recordings) is stored or shared without the user's consent.
-    * Ensure that the voice recognition process is performed locally, without sending data to external servers unless necessary.
+Note: This extension uses the Chrome built in prompt API. Ensure that you have access to the API before going through the following steps. You can read more about the API and setting up [here](https://docs.google.com/document/d/1VG8HIyz361zGduWgNG7R_R8Xkv0OOJ8b5C9QKeCjU0c/edit?tab=t.0).
 
-## Workflow
+1. Clone this repository onto your device.
+2. Go to your browser (where the built-in API is set up) and go to the [extensions page](chrome://extensions/).
+3. Ensure Developer Mode is on.
+4. Click on Load Unpacked Extension and choose the folder where this repository is closed.
+5. Give the extension access to your microphone and you're good to go.
+6. To use this extension, just click on the extension icon, and click 'Start recording'.
 
-1. Installation & Setup
-* Users install the extension from the Chrome Web Store.
-* During the first launch, the user is prompted to grant permissions for microphone access.
-* Users can access settings to customize voice commands, language preferences, and other accessibility options.
-2. Activating Voice Control
-* The user activates voice control via a click on the extension icon or a voice command like "Hey, Google."
-* The extension begins listening for commands through the microphone.
-3. Processing Voice Commands
-* Speech is transcribed into text using a speech recognition engine (e.g., the Google Web Speech API).
-* The extension processes the transcription and matches it to predefined voice commands.
-* Contextual analysis is performed to determine what part of the web page the command applies to (e.g., selecting a link, scrolling, etc.).
-4. Executing Actions
-* Based on the recognized command, the extension triggers the appropriate browser action:
-    * Navigation commands (back, forward, reload) control the browser's history.
-    * Scrolling commands (scroll up, scroll down) adjust the page's scroll position.
-    * Interaction commands (click on a link, submit a form) simulate user actions on the page.
-    * Accessibility adjustments can be made (e.g., enlarging text, changing contrast).
-5. Providing Feedback
-* After executing a command, the extension can provide audio or visual feedback to confirm the action (e.g., "The page has reloaded").
-* If an action could not be performed, feedback is provided (e.g., “I couldn’t find that link”).
-6. Ongoing Voice Interaction
-* The extension remains active, continuously listening for new commands as long as the user hasn’t deactivated it.
-* Users can interrupt the ongoing command processing by saying “Stop listening” or clicking on the extension icon.
-7. Settings & Customization
-* Users can customize the voice commands and their corresponding actions via the settings menu.
-* Commands can be added or removed, and the user can set preferences for voice speed, volume, and language.
-8. Exit
-* The user can deactivate voice control by saying “Stop listening” or clicking on the extension icon again.
-* The extension stops listening and provides a confirmation
+   ![alt text](images/image.png)
 
-## Use Cases
+7. The extension will detect commands and send them to the backend to process.
+8. To stop the recording, click on the Stop Recording button.
 
-1. Search the Web
-* Use Case: Performing a web search using voice commands.
-    * Actors: User, Voice-Controlled Chrome Extension, Web Browser, Search Engine
-    * Description: The user says something like, "Search for [query]" or "Find [topic]" and the extension automatically opens a search engine with the query.
-    * Example: "Search for how to bake a cake" performs a Google search for the recipe.
-2. Open/Close Incognito Mode
-* Use Case: Managing browser modes with voice.
-    * Actors: User, Voice-Controlled Chrome Extension, Web Browser
-    * Description: The user can say, "Open incognito mode" to open a new incognito window, or "Close incognito window" to exit incognito mode.
-    * Example: "Open incognito mode" launches a private browsing window.
-3. Highlighting Text
-* Use Case: Highlighting text or selecting a portion of text on a webpage.
-    * Actors: User, Voice-Controlled Chrome Extension, Web Browser
-    * Description: The user can say, "Highlight [text]" to select specific text for further actions such as copying, sharing, or searching.
-    * Example: "Highlight the title" selects the title of the webpage.
-4. Control Media Playback
-* Use Case: Controlling audio or video playback on websites like YouTube, Netflix, or music streaming services.
-    * Actors: User, Voice-Controlled Chrome Extension, Web Browser, Media Player
-    * Description: The user can issue voice commands to control media playback, such as "Play," "Pause," "Next," "Previous," "Mute," or "Unmute."
-    * Example: "Play" resumes the video; "Next" skips to the next video or song.
-5. Form Filling
-* Use Case: Filling out online forms using voice commands.
-    * Actors: User, Voice-Controlled Chrome Extension, Web Browser
-    * Description: The user can say, "Fill in my name," "Enter my email," or "Submit the form" to complete fields in a form.
-    * Example: "Fill in my name" autofills the name field of an online form with the user's saved information.
-6. Bookmark Management
-* Use Case: Adding or managing bookmarks via voice.
-    * Actors: User, Voice-Controlled Chrome Extension, Web Browser
-    * Description: The user can say, "Bookmark this page," "Add to favorites," or "Show my bookmarks" to manage their browsing bookmarks.
-    * Example: "Bookmark this page" saves the current webpage to the user's bookmark list.
+   ![alt text](images/image-1.png)
 
-## User Stories
+## Current Working
 
-1. Voice Navigation for Web Pages
-* As a user, I want to navigate through web pages using voice commands so that I can browse the internet without needing to use a mouse or keyboard.
-2. Voice Command for Opening Links
-* As a user, I want to be able to open links on a page using voice commands so that I can easily access additional content without using a mouse.
-3. Voice Commands for Page Actions (e.g., Submit, Cancel)
-* As a user, I want to perform page actions like submitting forms or cancelling actions using voice commands.
-4. Customizable Voice Command Settings
-* As a user, I want to customize voice commands to fit my preferences or language so that the experience is more personalized.
-5. Voice Command for Page Refresh
-* As a user, I want to refresh the webpage using a voice command, allowing for easy reloading without manually clicking the refresh button.
-6. Voice Command for Browser Tabs Management
-* As a user, I want to switch between tabs, open new tabs, or close tabs using voice commands so that I can manage my browsing experience hands-free.
-7. Multilingual Voice Support
-* As a user, I want to use the extension in my preferred language so that I can navigate the web in the language that is most comfortable for me.
-8. Privacy and Data Security for Voice Commands
-* As a user, I want to ensure that my voice data is secure and not stored or misused by the extension.
+The extension uses the browser's inbilt speech recognition to recognise speech and generate commands.
 
+We've created some DOM-based actions that can manipulate the browser.
 
+For commands that follow a certain pattern, like scrolling, clicking and closing current tab, the extension tries to automatically choose the correct action. Failing that, the commands are sent to Prompt API, which decides on the best combination of actions to takes and sends an answer which is parsed and implemented.
+
+Currently the only actions are scrolling, clicking, typing, opening a url in a new tab and closing the current tab.
+
+## What's next
+
+1. Adding more actions like:
+   - go back
+   - go forward
+   - reload
+   - switch to another tab
+   - find in page
+   - exit extension (stop recording)
+   - stop the current action
+   - search the web
+   - select an element and perform further actions on it (get link, copy text etc)
+   - control media playback
+   - bookmark tab, open from bookmarked tabs
+2. Add more ways to find an element, including xpath and css.
+3. Provide feedback to user to confirm actions and give status of actions (e.g., "Page reloaded," "Link not found")
+4. Add more ways to connect to AI (using user-given API keys) for users without access to the prompt API.
+5. Allow users to chat directly with the AI if there is no command.
+6. Provide interface for users to edit complex commands if they feel voice recognition is not accurate enough.
+7. Add support for more languages.
+8. Allow users to customise commands
