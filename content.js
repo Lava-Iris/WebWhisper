@@ -8,9 +8,6 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 function processMessage(message) {
   console.log(message);
-  const el = document.createElement('h3')
-  el.textContent = message;
-  document.body.prepend(el);
   handleVoiceCommand(message);
 }
 
@@ -69,7 +66,7 @@ const actions = {
   },
   scroll: (direction) => {
     window.scrollBy({
-      top: direction === "down" ? 500 : direction == "up" ? -500 : direction == "top" ? -window.scrollY : window.scrollY,
+      top: direction === "down" ? 500 : direction === "up" ? -500 : direction === "top" ? -window.scrollY : window.scrollY,
       behavior: "smooth",
     });
   },
@@ -125,17 +122,33 @@ const handleVoiceCommand = (command) => {
 };
 
 
+function getSkeletonString(element = document.body, depth = 0, maxDepth = 3) {
+  if (depth > maxDepth || !element) return '';
+
+  const tag = element.tagName.toLowerCase();
+  const id = element.id ? `#${element.id}` : '';
+  const classes = element.className ? `.${element.className.trim().replace(/\s+/g, '.')}` : '';
+  const selector = `${tag}${id}${classes}`;
+  
+  const children = Array.from(element.children)
+    .map(child => getSkeletonString(child, depth + 1, maxDepth))
+    .filter(Boolean)
+    .join(', ');
+
+  return children ? `${selector} { ${children} }` : selector;
+}
 
 
-
-const sendToLLM = async (query) => {
+const session = null;
+const createSession = async () => {
   const {available, defaultTemperature, defaultTopK, maxTopK } = await ai.languageModel.capabilities();
   console.log("sent to model");
-  const prompt_template = `
+  const skeleton = getSkeletonString();
+  const skeletonStr = skeleton.length > 200 ? '' : `Current page skeleton: ${skeleton}`;
+
+  const system_prompt = `
   You are an assistant capable of controlling web page elements through simple commands. Your task is to interpret 
   a user's command and map it to actions on the page. The input can have some spelling errors or be incomplete.
-
-  User Command: "${query}"
 
   Your response should be a list of the tuples of actions and corresponding input. The actions and their inputs are as follows:
   1. (click, text): where text is used to search for the relevant element to click on based on element text or id (with fuzzy search)
@@ -143,6 +156,9 @@ const sendToLLM = async (query) => {
   3. (open_in_new_tab, url): url (optional) is the url to open in a new tab (if url is empty, it opens a blank new tab)
   4. (type, text, element): element is optional and is used to find the element to type in. If no element is selected, it types the
    text in the active input field (if no input field is active, it finds the first input field and types in it)
+
+  Current url: ${window.location.href}
+  ${skeletonStr}
 
   Please respond only with the action and the inputs, or state if no matching action is possible.
 
@@ -159,21 +175,31 @@ const sendToLLM = async (query) => {
   Input: "open google in a new tab"
   Output: "[(open_in_new_tab, https://www.google.com)]"
   `;
-  console.log(prompt_template);
 
-  if (available !== "no") {
-    const session = await ai.languageModel.create();
+  if (available === "readily") {
+    session = await ai.languageModel.create(system_prompt);
     console.log("created session");
-  
-    // Prompt the model and wait for the whole result to come back.  
-    const result = await session.prompt(prompt_template);
-    console.log(result);
-  }
-  
-  const result = await geminiModel.process(query); // Replace with actual Gemini model API
-  if (result.action && actions[result.action]) {
-    actions[result.action](result.data);
   } else {
-    console.error("Unrecognized command or action:", result);
+    console.warn("The built in AI model is not available. Complex commands may not be supported.");
+  }
+}
+
+const sendToLLM = async (query) => {
+  if (session && session.tokensLeft > query.length + 100) {
+    const result = await session.prompt(query);
+    console.log(result);
+    if (result[0] == '[') {
+      const actionsList = JSON.parse(result);
+      for (const [action, ...data] of actionsList) {
+        if (actions[action]) {
+          actions[action](...data);
+        } else {
+          console.warn("Unrecognized action:", action);
+        }
+      }
+    }
+  } else {
+    createSession();
+    sendToLLM(query);
   }
 };
