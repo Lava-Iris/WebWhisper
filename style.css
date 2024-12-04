@@ -2,6 +2,7 @@ button {
   display: inline-block;
   padding: 0.75rem 1.25rem;
   border-radius: 10rem;
+  border-color: #0cf;
   color: #fff;
   text-transform: uppercase;
   font-size: 1rem;
@@ -55,61 +56,79 @@ button {
   text-align: center;
 }
 /* Importing Montserrat Font from Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap");
 
 /* Styling for Heading 1 (H1) */
 h1 {
-    font-family: 'Montserrat', sans-serif;  /* Use Montserrat font */
-    font-weight: 600;  /* Semi-bold weight */
-    font-size: 48px;  /* Large size for main headings */
-    color: #2C3E50;  /* Dark color for contrast */
-    text-transform: uppercase;  /* Uppercase letters for impact */
-    letter-spacing: 1.5px;  /* Slight spacing between letters */
-    text-align: center;  /* Center alignment */
-    line-height: 1.2;  /* Adjust line height for better readability */
-    margin-bottom: 20px;  /* Space below the heading */
-    transition: all 0.3s ease;  /* Smooth transition for all properties */
+  font-family: "Montserrat", sans-serif; /* Use Montserrat font */
+  font-weight: 600; /* Semi-bold weight */
+  font-size: 48px; /* Large size for main headings */
+  color: #2c3e50; /* Dark color for contrast */
+  text-transform: uppercase; /* Uppercase letters for impact */
+  letter-spacing: 1.5px; /* Slight spacing between letters */
+  text-align: center; /* Center alignment */
+  line-height: 1.2; /* Adjust line height for better readability */
+  margin-bottom: 20px; /* Space below the heading */
+  transition: all 0.3s ease; /* Smooth transition for all properties */
+  padding-left: 20%;
+  padding-right: 20%;
+}
+
+h3 {
+  font-family: "Montserrat", sans-serif; /* Use Montserrat font */
+  font-weight: 600; /* Semi-bold weight */
+  font-size: 48px; /* Large size for main headings */
+  color: #a35ef8; /* Dark color for contrast */
+  text-transform: uppercase; /* Uppercase letters for impact */
+  letter-spacing: 1.5px; /* Slight spacing between letters */
+  text-align: center; /* Center alignment */
+  line-height: 1.2; /* Adjust line height for better readability */
+  margin-bottom: 20px; /* Space below the heading */
+  transition: all 0.3s ease; /* Smooth transition for all properties */
+  padding: 20;
 }
 
 /* Hover effect for H1 */
 h1 {
   font-size: 3rem;
-  color: #333;  /* Default dark color */
+  color: #333; /* Default dark color */
   transition: transform 0.3s ease, color 0.3s ease;
   display: inline-block;
 }
 
 h1:hover {
-  transform: rotate(5deg);  /* Slight rotation on hover */
-  color: #B497D6;  /* Soft lavender color for the text */
+  transform: rotate(5deg); /* Slight rotation on hover */
+  color: #b497d6; /* Soft lavender color for the text */
 }
-
-
-
 
 /* Styling for Heading 2 (H2) */
 h2 {
-    font-family: 'Montserrat', sans-serif; /* Use Roboto font */
-    font-weight: 700;  /* Bold weight */
-    font-size: 36px;  /* Slightly smaller than H1 */
-    color: #34495E;  /* Slightly lighter dark color */
-    text-align: center;  /* Center alignment */
-    line-height: 1.3;  /* Increased line-height for readability */
-    margin-bottom: 15px;  /* Space below the heading */
-    text-transform: capitalize;  /* Capitalize first letters of each word */
-    transition: color 0.3s ease, transform 0.3s ease;  /* Smooth transition */
+  font-family: "Montserrat", sans-serif; /* Use Roboto font */
+  font-weight: 700; /* Bold weight */
+  font-size: 36px; /* Slightly smaller than H1 */
+  color: #34495e; /* Slightly lighter dark color */
+  text-align: center; /* Center alignment */
+  line-height: 1.3; /* Increased line-height for readability */
+  margin-bottom: 15px; /* Space below the heading */
+  text-transform: capitalize; /* Capitalize first letters of each word */
+  transition: color 0.3s ease, transform 0.3s ease; /* Smooth transition */
+  padding: 5%;
 }
 
 /* Hover effect for H2 */
 h2:hover {
-    color: #D4A5A5;  /* Soft rose gold for a chic, elegant effect */
-    transform: scale(1.03);  /* Subtle scale effect for focus */
-    text-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);  /* Soft, chic shadow for depth */
+  color: #d4a5a5; /* Soft rose gold for a chic, elegant effect */
+  transform: scale(1.03); /* Subtle scale effect for focus */
+  text-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3); /* Soft, chic shadow for depth */
 }
 
 body {
-  background: linear-gradient(135deg, #f4b6c2, #cfe2f3); /* Soft pastel gradient */
-  font-family: 'Merriweather', serif;
+  background: linear-gradient(
+    135deg,
+    #f4b6c2,
+    #cfe2f3
+  ); /* Soft pastel gradient */
+  font-family: "Merriweather", serif;
   color: #333;
   display: flex;
   justify-content: center;
@@ -123,43 +142,17 @@ body {
   position: absolute;
   width: 100%;
   height: 100%;
-  background: url('fluid-animation.svg') repeat;
+  background: url("fluid-animation.svg") repeat;
   animation: flow 12s ease-in-out infinite;
   opacity: 0.3;
   z-index: -1;
 }
 
 @keyframes flow {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-100%); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-
-
