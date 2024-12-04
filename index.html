@@ -5,23 +5,87 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WebWhisper</title>
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="container">
-    <h1>welcome to the extension</h1>  
-  <button id="requestMic" <a href="#" class="button">request microphone access</a></button>
+    <h1>Oh, You’re Still Typing? Darling, We’ve Moved On</h1>  
+  <button id="requestMic" <a href="#" class="button">The Mic’s Waiting, You Know What to Do</a></button>
   <p id="status"></p>
+  <h2>Tell me where to go—your voice, your way!</h2>
+  <style>
+  h1 {
+    margin-bottom: 20px; /* Adds space below the h1 */
+}
 
-  
-  <div class="mic-container">
-    <div class="mic">
-      <div class="mic-head"></div>
-      <div class="mic-neck"></div>
-      <div class="mic-base"></div>
-    </div>
-    <div class="indicator"></div>
-  </div>
-  
+button {
+    padding: 10px 20px; /* Adds some padding inside the button */
+    font-size: 16px; /* Makes the button text larger */
+    margin-bottom: 20px; /* Adds space below the button */
+    cursor: pointer; /* Shows pointer cursor on hover */
+    color: white; /* White text */
+    border: none; /* Removes the default border */
+    border-radius: 5px; /* Rounded corners */
+}
+
+h2 {
+    margin-top: 0; /* Removes default top margin of h2 */
+    font-size: 24px; /* Larger font for h2 */
+}
+.footer {
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      font-size: 1.2em;
+      color: #333;
+      margin-top: 50px;
+      padding: 20px;
+      background-color: #f7f7f7;
+    }
+
+    /* Animation for a subtle bounce effect */
+    @keyframes bounce {
+      0% { transform: translateY(0); }
+      30% { transform: translateY(-5px); }
+      50% { transform: translateY(0); }
+      70% { transform: translateY(-5px); }
+      100% { transform: translateY(0); }
+    }
+
+    .footer .animated {
+      display: inline-block;
+      animation: bounce 1s ease infinite;
+    }
+
+    /* Optional: Color transition effect */
+    .footer .animated:hover {
+      color: #ff66b2;
+      transition: color 0.3s ease;
+    }
+
+    /* Styling for GitHub link */
+    .footer a {
+      color: #24292f; /* GitHub's default link color */
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    .footer a:hover {
+      color: #0366d6; /* GitHub link hover color */
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Your content here -->
+
+  <!-- Footer with GitHub link and animation -->
+  <footer class="footer">
+    <br> Better check it out before the rest of the world does.After all, some things... are just too good to keep secret.<a href="https://github.com/Lava-Iris/Google-AI-hackathon-2024" target="_blank">GitHub</a>. 
+    <span class="animated">XOXO, GG 💕</span>
+  </footer>
+
+
   
   <script src="welcome.js"></script>
 </body>
