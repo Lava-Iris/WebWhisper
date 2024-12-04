@@ -32,11 +32,60 @@ h2 {
     margin-top: 0; /* Removes default top margin of h2 */
     font-size: 24px; /* Larger font for h2 */
 }
-</style>
+.footer {
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      font-size: 1.2em;
+      color: #333;
+      margin-top: 50px;
+      padding: 20px;
+      background-color: #f7f7f7;
+    }
 
-  
-  
-  
+    /* Animation for a subtle bounce effect */
+    @keyframes bounce {
+      0% { transform: translateY(0); }
+      30% { transform: translateY(-5px); }
+      50% { transform: translateY(0); }
+      70% { transform: translateY(-5px); }
+      100% { transform: translateY(0); }
+    }
+
+    .footer .animated {
+      display: inline-block;
+      animation: bounce 1s ease infinite;
+    }
+
+    /* Optional: Color transition effect */
+    .footer .animated:hover {
+      color: #ff66b2;
+      transition: color 0.3s ease;
+    }
+
+    /* Styling for GitHub link */
+    .footer a {
+      color: #24292f; /* GitHub's default link color */
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    .footer a:hover {
+      color: #0366d6; /* GitHub link hover color */
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Your content here -->
+
+  <!-- Footer with GitHub link and animation -->
+  <footer class="footer">
+    <br> Better check it out before the rest of the world does.After all, some things... are just too good to keep secret.<a href="https://github.com/Lava-Iris/Google-AI-hackathon-2024" target="_blank">GitHub</a>. 
+    <span class="animated">XOXO, GG 💕</span>
+  </footer>
+
+
   
   <script src="welcome.js"></script>
 </body>
