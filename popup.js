@@ -3,6 +3,9 @@ const button = document.getElementById('toggleButton');
 
 chrome.storage.local.get(['isRecording'], (result) => {
   isRecording = result.isRecording || false;
+  if (isRecording) {
+    startRecording();
+  }
   updateButtonState();
 });
 
@@ -71,7 +74,7 @@ function resetTimeout() {
       transcriptionEl.textContent += "\n\n Sent";
       console.log(transcriptionEl.textContent)
     }
-  }, 1000);
+  }, 500);
 }
 
 function stopRecording() {
