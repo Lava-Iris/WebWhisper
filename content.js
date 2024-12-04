@@ -65,10 +65,16 @@ const actions = {
     }
   },
   scroll: (direction) => {
-    window.scrollBy({
-      top: direction === "down" ? 500 : direction === "up" ? -500 : direction === "top" ? -window.scrollY : window.scrollY,
-      behavior: "smooth",
-    });
+    if (direction === "top") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else if (direction === "bottom") {
+      window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+    } else if (direction === "up" || direction === "down") {
+      window.scrollBy({
+        top: direction === "down" ? 500 : -500,
+        behavior: "smooth",
+      });
+    }
   },
   open_in_new_tab: (url = null) => {
     window.open(url, "_blank");
