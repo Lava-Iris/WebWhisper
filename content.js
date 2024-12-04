@@ -82,7 +82,10 @@ const actions = {
       const el = findElement("input") || findElement("textarea") || findElement("div[contenteditable]");
       if (el) el.value = text;
     }
-  }
+  },
+  close_tab: () => {
+    window.close();
+  },
 };
 
 const handleVoiceCommand = (command) => {
@@ -93,6 +96,7 @@ const handleVoiceCommand = (command) => {
     { type: "click", regex: /^(click (on )?|go (to)?)(.*)$/ },
     { type: "scroll", regex: /^scroll (up|down|to the (top|bottom))$/ },
     { type: "type", regex: /^((type|write)\s+(.+?)\s+in\s+(.+)|(type|write)\s+(.+))$/ },
+    { type: "close_tab", regex: /^(close|exit)( tab| window)?$/ },
   ];
 
   // Match command to an action
@@ -112,6 +116,9 @@ const handleVoiceCommand = (command) => {
           } else {
             actions.type(match[6]);
           }
+          return;
+        case "close_tab":
+          actions.close_tab();
           return;
       }
     }
@@ -156,6 +163,7 @@ const createSession = async () => {
   3. (open_in_new_tab, url): url (optional) is the url to open in a new tab (if url is empty, it opens a blank new tab)
   4. (type, text, element): element is optional and is used to find the element to type in. If no element is selected, it types the
    text in the active input field (if no input field is active, it finds the first input field and types in it)
+  5. (close_tab): closes the current tab
 
   Current url: ${window.location.href}
   ${skeletonStr}
