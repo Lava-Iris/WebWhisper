@@ -1,4 +1,4 @@
-# WEB WHISPER
+# WEB WHISPER (in progress)
 
 A powerful Chrome extension designed to make web navigation hands-free and intuitive. With just your voice, you can open tabs, scroll through pages, click links, and even search the web—no need to lift a finger. Perfect for multitaskers, people with accessibility needs, or anyone looking for a more efficient and futuristic way to browse.
 
